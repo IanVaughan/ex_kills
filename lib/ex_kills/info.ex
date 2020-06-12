@@ -9,7 +9,7 @@ defmodule ExKills.Info do
     {:ok, pid}
   end
 
-  def handle_connect(conn, state) do
+  def handle_connect(_conn, state) do
     IO.puts "Connected!"
     {:ok, state}
   end

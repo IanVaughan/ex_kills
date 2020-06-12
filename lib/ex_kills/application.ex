@@ -9,6 +9,7 @@ defmodule ExKills.Application do
     children = [
       # Starts a worker by calling: ExKills.Worker.start_link(arg)
       # {ExKills.Worker, arg}
+      Kills.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
