@@ -51,7 +51,7 @@ defmodule ExKills.Kills do
     }
     |> Kills.Repo.insert
 
-    ExKills.Read.get(kill["ship_type_id"])
+    ExKills.Read.Ship.get(kill["ship_type_id"])
 
     {:ok, state}
   end

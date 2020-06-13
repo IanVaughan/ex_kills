@@ -1,14 +1,14 @@
-defmodule ExKills.Read do
+defmodule ExKills.Read.Ship do
 
-  alias Kills.{Repo, Ship, Kill}
+  alias Kills.{Repo, Ship}
 
   @base_url "https://zkillboard.com/"
   @compent_url "ship/"
 
   def get(id) do
-    case Kills.Repo.get(Kills.Ship, id) do
+    case Repo.get(Ship, id) do
       nil -> fetch(id)
-      found -> nil
+      found -> found
     end
   end
 
@@ -33,7 +33,8 @@ defmodule ExKills.Read do
         IO.inspect class_name, label: "class_name"
         IO.inspect class_id, label: "class_id"
 
-        %Kills.Ship{id: ship_id, name: ship_name} |> Kills.Repo.insert(on_conflict: :nothing)
+        %Ship{id: ship_id, name: ship_name}
+        |> Repo.insert(on_conflict: :nothing)
 
     {:ok, %HTTPoison.Response{status_code: 404}} ->
       IO.puts "Not found :("
