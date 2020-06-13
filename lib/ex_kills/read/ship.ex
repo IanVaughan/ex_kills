@@ -1,6 +1,6 @@
 defmodule ExKills.Read.Ship do
 
-  alias Kills.{Repo, Ship}
+  alias Kills.{Repo, Ship, Class}
 
   @base_url "https://zkillboard.com/"
   @compent_url "ship/"
@@ -33,7 +33,10 @@ defmodule ExKills.Read.Ship do
         IO.inspect class_name, label: "class_name"
         IO.inspect class_id, label: "class_id"
 
-        %Ship{id: ship_id, name: ship_name}
+        %Ship{id: ship_id, name: ship_name, class_id: class_id}
+        |> Repo.insert(on_conflict: :nothing)
+
+        %Class{id: class_id, name: class_name}
         |> Repo.insert(on_conflict: :nothing)
 
     {:ok, %HTTPoison.Response{status_code: 404}} ->
@@ -56,6 +59,13 @@ end
 
 # Kills.Repo.preload(ship, :kills)
 # Kills.Kill |> Ecto.Query.first |> Kills.Repo.one
+# Kills.Ship |> Ecto.Query.first |> Kills.Repo.one
+# Kills.Class |> Ecto.Query.first |> Kills.Repo.one
 
 # kill = Kills.Repo.get(Kills.Kill, 4839)
 # Kills.Repo.preload(kill, :ship_type)
+
+# ship_name: "Einherji II"
+# ship_id: 40559
+# class_name: "Light Fighter"
+# class_id: 1652

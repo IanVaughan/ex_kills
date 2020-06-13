@@ -24,6 +24,7 @@ defmodule ExKills.Kills do
     subscription_msg = %{
       action: "sub",
       channel: "none:*"
+      # channel: "killstream"
     } |> Jason.encode!()
 
     {:text, subscription_msg}
@@ -52,6 +53,8 @@ defmodule ExKills.Kills do
     |> Kills.Repo.insert
 
     ExKills.Read.Ship.get(kill["ship_type_id"])
+    ExKills.Read.Corp.get(kill["corporation_id"])
+    ExKills.Read.Char.get(kill["character_id"])
 
     {:ok, state}
   end
