@@ -6,7 +6,7 @@ defmodule ExKills.Application do
   def start(_type, _args) do
     children = [
       Kills.Repo,
-      # ExKills.Kills # ExKills.Kills.start_link([])
+      ExKills.Kills # ExKills.Kills.start_link([])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

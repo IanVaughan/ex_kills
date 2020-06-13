@@ -14,9 +14,9 @@ defmodule ExKills.Kills do
     {:ok, state}
   end
 
-  def handle_disconnect(connection_status_map, state) do
+  def handle_disconnect(_connection_status_map, state) do
     IO.puts "Disconnected!"
-    IO.inspect connection_status_map
+    # IO.inspect connection_status_map
     {:reconnect, state}
   end
 
