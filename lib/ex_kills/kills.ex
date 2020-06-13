@@ -3,15 +3,23 @@ defmodule ExKills.Kills do
 
   @url "wss://zkillboard.com:2096"
 
-  def start_link do
+  def start_link([]) do
     {:ok, pid} = WebSockex.start_link(@url, __MODULE__, :no_state)
     subscribe(pid)
+    # IO.inspect pid
     {:ok, pid}
   end
 
-  def handle_connect(_conn, state) do
+  def handle_connect(conn, state) do
     IO.puts "Connected!"
+    # IO.inspect conn
     {:ok, state}
+  end
+
+  def handle_disconnect(connection_status_map, state) do
+    IO.puts "Disconnected!"
+    IO.inspect connection_status_map
+    {:reconnect, state}
   end
 
   defp subscribtion_frame do
@@ -29,9 +37,22 @@ defmodule ExKills.Kills do
   end
 
   def handle_frame(_frame={:text, msg}, state) do
-    msg
+    kill = msg
     |> Jason.decode!()
-    |> IO.inspect()
+    # |> IO.inspect()
+
+    %Kills.Kill{
+      action: kill["action"],
+      alliance_id: kill["alliance_id"],
+      character_id: kill["character_id"],
+      corporation_id: kill["corporation_id"],
+      hash: kill["hash"],
+      killID: kill["killID"],
+      ship_type_id: kill["ship_type_id"],
+      url: kill["url"]
+    }
+    |> Kills.Repo.insert
+
     {:ok, state}
   end
 end
@@ -46,3 +67,6 @@ end
 #   "ship_type_id" => 32878,
 #   "url" => "https://zkillboard.com/kill/84906560/"
 # }
+
+
+# Kills.Kill |> Ecto.Query.first |> Kills.Repo.one
