@@ -6,13 +6,11 @@ defmodule ExKills.Kills do
   def start_link([]) do
     {:ok, pid} = WebSockex.start_link(@url, __MODULE__, :no_state)
     subscribe(pid)
-    # IO.inspect pid
     {:ok, pid}
   end
 
-  def handle_connect(conn, state) do
+  def handle_connect(_conn, state) do
     IO.puts "Connected!"
-    # IO.inspect conn
     {:ok, state}
   end
 
@@ -53,6 +51,8 @@ defmodule ExKills.Kills do
     }
     |> Kills.Repo.insert
 
+    ExKills.Read.get(kill["ship_type_id"])
+
     {:ok, state}
   end
 end
@@ -67,6 +67,3 @@ end
 #   "ship_type_id" => 32878,
 #   "url" => "https://zkillboard.com/kill/84906560/"
 # }
-
-
-# Kills.Kill |> Ecto.Query.first |> Kills.Repo.one

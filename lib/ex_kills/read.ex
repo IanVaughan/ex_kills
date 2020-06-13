@@ -1,9 +1,18 @@
 defmodule ExKills.Read do
 
+  alias Kills.{Repo, Ship, Kill}
+
   @base_url "https://zkillboard.com/"
   @compent_url "ship/"
 
   def get(id) do
+    case Kills.Repo.get(Kills.Ship, id) do
+      nil -> fetch(id)
+      found -> nil
+    end
+  end
+
+  def fetch(id) do
     url = "#{@base_url}#{@compent_url}#{id}/"
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
@@ -23,6 +32,9 @@ defmodule ExKills.Read do
         IO.inspect ship_id, label: "ship_id"
         IO.inspect class_name, label: "class_name"
         IO.inspect class_id, label: "class_id"
+
+        %Kills.Ship{id: ship_id, name: ship_name} |> Kills.Repo.insert(on_conflict: :nothing)
+
     {:ok, %HTTPoison.Response{status_code: 404}} ->
       IO.puts "Not found :("
     {:error, %HTTPoison.Error{reason: reason}} ->
@@ -40,3 +52,9 @@ end
 #   {"a", [{"href", "/item/626/"}], ["Vexor"]},
 #   {"a", [{"href", "/group/26/"}], ["Cruiser"]}
 # ]
+
+# Kills.Repo.preload(ship, :kills)
+# Kills.Kill |> Ecto.Query.first |> Kills.Repo.one
+
+# kill = Kills.Repo.get(Kills.Kill, 4839)
+# Kills.Repo.preload(kill, :ship_type)

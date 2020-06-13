@@ -8,8 +8,10 @@ defmodule Kills.Kill do
     field :corporation_id, :integer
     field :hash, :string
     field :killID, :integer
-    field :ship_type_id, :integer
+    # field :ship_type_id, :integer
     field :url, :string
+
+    belongs_to :ship_type, Kills.Ship #, foreign_key: :id #, define_field: false, foreign_key: :ship_type_id
 
     timestamps()
   end
