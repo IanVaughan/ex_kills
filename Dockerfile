@@ -10,11 +10,11 @@ RUN apk update \
     && mix local.hex --force
 COPY . .
 RUN mix do deps.get, compile
-RUN cd ${phoenix_subdir}/assets \
-    && npm install \
-    && ./node_modules/webpack/bin/webpack.js --mode production \
-    && cd .. \
-    && mix phx.digest
+# RUN cd ${phoenix_subdir}/assets \
+#     && npm install \
+#     && ./node_modules/webpack/bin/webpack.js --mode production \
+#     && cd .. \
+#     && mix phx.digest
 RUN mix release ${app_name} \
     && mv _build/${build_env}/rel/${app_name} /opt/release \
     && mv /opt/release/bin/${app_name} /opt/release/bin/start_server
