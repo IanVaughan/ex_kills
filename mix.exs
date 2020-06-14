@@ -4,6 +4,15 @@ defmodule ExKills.MixProject do
   def project do
     [
       app: :ex_kills,
+      releases: [
+        ex_kills: [
+          include_erts: true,
+          include_executables_for: [:unix],
+          applications: [
+            runtime_tools: :permanent
+          ]
+        ]
+      ],
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
