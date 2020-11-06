@@ -28,10 +28,10 @@ defmodule ExKills.Read.Ship do
         {ship_id,_} = Integer.parse(ship_id_text)
         {class_id,_} = Integer.parse(class_id_text)
 
-        IO.inspect ship_name, label: "ship_name"
-        IO.inspect ship_id, label: "ship_id"
-        IO.inspect class_name, label: "class_name"
-        IO.inspect class_id, label: "class_id"
+        # IO.inspect ship_name, label: "ship_name"
+        # IO.inspect ship_id, label: "ship_id"
+        # IO.inspect class_name, label: "class_name"
+        # IO.inspect class_id, label: "class_id"
 
         %Ship{id: ship_id, name: ship_name, class_id: class_id}
         |> Repo.insert(on_conflict: :nothing)

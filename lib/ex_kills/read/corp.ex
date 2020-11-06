@@ -13,7 +13,7 @@ defmodule ExKills.Read.Corp do
   end
 
   def fetch(id) do
-    url = "#{@base_url}#{@compent_url}#{id}/" |> IO.inspect
+    url = "#{@base_url}#{@compent_url}#{id}/" # |> IO.inspect
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         data = body |> Jason.decode!()

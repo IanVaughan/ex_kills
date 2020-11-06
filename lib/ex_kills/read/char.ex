@@ -13,7 +13,7 @@ defmodule ExKills.Read.Char do
   end
 
   def fetch(id) do
-    url = "#{@base_url}#{@compent_url}#{id}/" |> IO.inspect
+    url = "#{@base_url}#{@compent_url}#{id}/" # |> IO.inspect
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         data = body |> Jason.decode!()
@@ -40,13 +40,3 @@ defmodule ExKills.Read.Char do
     end
   end
 end
-
-# -H  "If-None-Match: 4c24d138af462a8fa861ca083cd86e8490d2e1e0e46e8665f4dae1ef"
-
-# etag: "4c24d138af462a8fa861ca083cd86e8490d2e1e0e46e8665f4dae1ef"
-# expires: Sun, 14 Jun 2020 10:52:41 GMT
-# last-modified: Sat, 13 Jun 2020 10:52:41 GMT
-# strict-transport-security: max-age=31536000
-# vary: Accept-Encoding
-# x-esi-error-limit-remain: 100
-# x-esi-error-limit-reset: 31
