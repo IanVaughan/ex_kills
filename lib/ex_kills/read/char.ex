@@ -1,8 +1,8 @@
 defmodule ExKills.Read.Char do
-
   alias Kills.{Repo, Character}
 
-  @base_url "https://esi.evetech.net/latest/" #/?datasource=tranquility
+  # /?datasource=tranquility
+  @base_url "https://esi.evetech.net/latest/"
   @compent_url "characters/"
 
   def get(id) do
@@ -13,13 +13,15 @@ defmodule ExKills.Read.Char do
   end
 
   def fetch(id) do
-    url = "#{@base_url}#{@compent_url}#{id}/" # |> IO.inspect
+    url = "#{@base_url}#{@compent_url}#{id}/"
+
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         data = body |> Jason.decode!()
 
         %Character{
-          id: id, # 1000009
+          # 1000009
+          id: id,
           alliance_id: data["alliance_id"],
           ancestry_id: data["ancestry_id"],
           birthday: data["birthday"],
@@ -29,14 +31,15 @@ defmodule ExKills.Read.Char do
           gender: data["gender"],
           name: data["name"],
           race_id: data["race_id"],
-          security_status: data["security_status"],
+          security_status: data["security_status"]
         }
         |> Repo.insert(on_conflict: :nothing)
 
-    {:ok, %HTTPoison.Response{status_code: 404}} ->
-      IO.puts "Not found :("
-    {:error, %HTTPoison.Error{reason: reason}} ->
-      IO.inspect reason
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        IO.puts("Not found :(")
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        IO.inspect(reason)
     end
   end
 end

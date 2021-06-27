@@ -8,6 +8,6 @@ defmodule Kills.Class do
 
     timestamps()
 
-    # has_many :kills, Kills.Kill, foreign_key: :ship_type_id
+    has_many :kills, Kills.Kill, foreign_key: :ship_type_id
   end
 end

@@ -12,11 +12,10 @@ defmodule ExKills.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ExKills.PubSub},
       # Start the Endpoint (http/https)
-      ExKillsWeb.Endpoint
+      ExKillsWeb.Endpoint,
       # Start a worker by calling: ExKills.Worker.start_link(arg)
       # {ExKills.Worker, arg}
-      # ExKills.Kills # 
-      # ExKills.Kills.start_link([])
+      ExKills.Kills
     ]
 
     opts = [strategy: :one_for_one, name: ExKills.Supervisor]
