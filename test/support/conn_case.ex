@@ -32,10 +32,10 @@ defmodule ExKillsWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ExKills.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Kills.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ExKills.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Kills.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

@@ -6,13 +6,13 @@ defmodule ExKills.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      ExKills.Repo,
+      Kills.Repo,
       # Start the Telemetry supervisor
       ExKillsWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: ExKills.PubSub},
       # Start the Endpoint (http/https)
-      ExKillsWeb.Endpoint,
+      ExKillsWeb.Endpoint
       # Start a worker by calling: ExKills.Worker.start_link(arg)
       # {ExKills.Worker, arg}
       # ExKills.Kills # 

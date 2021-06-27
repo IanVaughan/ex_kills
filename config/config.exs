@@ -8,7 +8,7 @@
 use Mix.Config
 
 config :ex_kills,
-  ecto_repos: [ExKills.Repo]
+  ecto_repos: [Kills.Repo]
 
 # Configures the endpoint
 config :ex_kills, ExKillsWeb.Endpoint,

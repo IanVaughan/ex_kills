@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :ex_kills, ExKills.Repo,
+config :ex_kills, Kills.Repo,
   # username: "postgres",
   # password: "postgres",
   database: "ex_kills_dev",
