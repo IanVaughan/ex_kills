@@ -18,6 +18,7 @@ RUN mix do deps.get, compile
 RUN mix release ${app_name} \
     && mv _build/${build_env}/rel/${app_name} /opt/release \
     && mv /opt/release/bin/${app_name} /opt/release/bin/start_server
+
 FROM alpine:latest
 ARG project_id
 RUN apk update \

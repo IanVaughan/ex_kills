@@ -2,7 +2,7 @@ use Mix.Config
 
 config :ex_kills, Kills.Repo,
   username: "postgres",
-  password: "123456",
+  password: "y1kBFsfjlOAI4ntB",
   database: "ex_kills_repo",
-  socket_dir: "/tmp/cloudsql/ex-kills:us-west1:ex-kills-db-us-west1",
+  socket_dir: "/tmp/cloudsql/ex-kills-project-us-east1:us-central1:ex-kills-db2",
   pool_size: 15

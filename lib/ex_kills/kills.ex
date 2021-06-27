@@ -1,6 +1,7 @@
 defmodule ExKills.Kills do
   use WebSockex
 
+  # @url "wss://zkillboard.com:2096"
   @url "wss://zkillboard.com/websocket/"
 
   def start_link([]) do
