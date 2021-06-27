@@ -45,7 +45,21 @@ module.exports = (env, options) => {
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-      new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: 'static/', to: '../' }
+        ]
+      })
     ]
   }
 };
+
+// module.exports = {
+//   plugins: [
+//     new CopyWebpackPlugin({
+//       patterns: [
+//         { from: Path.resolve('./modules/web/static/'), to: './assets' },
+//         { from: Path.resolve('./modules/web/static/favicon.ico'), to: './' },
+//       ]
+//     }),
+//     new TsChecker({ typescript: { configFile: Path.resolve('tsconfig.json') } }),
