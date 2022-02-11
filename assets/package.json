@@ -19,7 +19,7 @@
     "babel-loader": "^8.0.0",
     "css-loader": "^3.4.2",
     "mini-css-extract-plugin": "^1.6.1",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "sass-loader": "^12.1.0",
     "terser-webpack-plugin": "^2.3.2",
